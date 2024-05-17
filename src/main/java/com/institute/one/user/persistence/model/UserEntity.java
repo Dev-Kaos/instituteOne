@@ -42,14 +42,14 @@ public class UserEntity {
     @Column(name = "is_enabled")
     private boolean isEnabled;
 
-    @Column(name = "is_account_no_expired")
-    private boolean isAccountNoExpired;
+    @Column(name = "account_no_expired")
+    private boolean AccountNoExpired;
 
-    @Column(name = "is_account_no_locked")
-    private boolean isAccountNoLocked;
+    @Column(name = "account_no_locked")
+    private boolean AccountNoLocked;
 
-    @Column(name = "is_credentials_no_expired")
-    private boolean isCredentialsNoExpired;
+    @Column(name = "credential_no_expired")
+    private boolean CredentialNoExpired;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))

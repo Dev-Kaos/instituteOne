@@ -22,4 +22,33 @@ public class UserController {
         return "seguridad";
     }
 
+    //TODO others
+
+    @GetMapping("/get")
+    @PreAuthorize("permitAll()")
+    public String helloGet() {
+        return "funciona";
+    }
+    
+    @GetMapping("/post")
+    @PreAuthorize("hasAuthority('CREATE')")
+    public String helloPost() {
+        return "seguridad";
+    }
+    @GetMapping("/put")
+    @PreAuthorize("permitAll()")
+    public String helloPut() {
+        return "funciona";
+    }
+    
+    @GetMapping("/delete")
+    @PreAuthorize("hasAuthority('CREATE')")
+    public String helloDelete() {
+        return "seguridad";
+    }
+    @GetMapping("/patch")
+    @PreAuthorize("hasAuthority('CREATE')")
+    public String helloPatch() {
+        return "seguridad";
+    }
 }
