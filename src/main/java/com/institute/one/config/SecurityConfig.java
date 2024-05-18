@@ -57,11 +57,34 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .httpBasic(Customizer.withDefaults())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                // .authorizeHttpRequests(http -> {
-                //     http.requestMatchers(HttpMethod.GET, "/usuario/funciona").permitAll();
-                //     http.requestMatchers(HttpMethod.GET, "/usuario/seguridad").hasAuthority("CREATE");
-                //     http.anyRequest().denyAll();
-                // })
+                .authorizeHttpRequests(http -> {
+
+                    //TODO allow authorization
+                    http.requestMatchers(HttpMethod.GET, "/usuario/funciona").permitAll();
+                    http.requestMatchers(HttpMethod.GET, "/usuario/get").permitAll();
+
+                    // allow authorization
+
+                    http.requestMatchers(HttpMethod.GET, "/usuario/seguridad").hasAuthority("CREATE");
+                    
+                    // others
+                    http.requestMatchers(HttpMethod.GET, "/usuario/get").hasAuthority("READ");
+                    http.requestMatchers(HttpMethod.POST, "/usuario/post").hasAuthority("CREATE");
+                    http.requestMatchers(HttpMethod.PUT, "/usuario/put").hasAuthority("UPDATE");
+                    
+                    
+                    
+                    // other methods
+                    
+                    http.requestMatchers(HttpMethod.DELETE, "/usuario/delete").hasAnyAuthority("UPDATE","DELETE");
+
+                    // other methods
+                    http.requestMatchers(HttpMethod.PATCH, "/usuario/patch").hasAnyRole("ADMIN", "USER");
+
+
+
+                    http.anyRequest().denyAll();
+                })
                 .build();
     }
 
@@ -85,22 +108,22 @@ public class SecurityConfig {
 
     // @Bean
     // public UserDetailsService userDetailsService() {
-    //     List<UserDetails> userDetailsList = new ArrayList<>();
+    // List<UserDetails> userDetailsList = new ArrayList<>();
 
-    //     userDetailsList.add(
-    //             User.withUsername("manuel")
-    //                     .password("1234")
-    //                     .roles("ADMIN")
-    //                     .authorities("READ", "CREATE")
-    //                     .build());
-    //     userDetailsList.add(
-    //             User.withUsername("fernando")
-    //                     .password("1234")
-    //                     .roles("USER")
-    //                     .authorities("READ")
-    //                     .build());
+    // userDetailsList.add(
+    // User.withUsername("manuel")
+    // .password("1234")
+    // .roles("ADMIN")
+    // .authorities("READ", "CREATE")
+    // .build());
+    // userDetailsList.add(
+    // User.withUsername("fernando")
+    // .password("1234")
+    // .roles("USER")
+    // .authorities("READ")
+    // .build());
 
-    //     return new InMemoryUserDetailsManager(userDetailsList);
+    // return new InMemoryUserDetailsManager(userDetailsList);
     // }
 
     @Bean

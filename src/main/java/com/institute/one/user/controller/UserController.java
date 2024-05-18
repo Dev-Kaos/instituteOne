@@ -11,17 +11,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @RestController
 @RequestMapping("/usuario")
-@PreAuthorize("denyAll()")
+// @PreAuthorize("denyAll()")
 public class UserController {
     
     @GetMapping("/funciona")
-    @PreAuthorize("permitAll()")
+    // @PreAuthorize("permitAll()")
     public String funciona() {
         return "funciona";
     }
     
     @GetMapping("/seguridad")
-    @PreAuthorize("hasAuthority('CREATE')")
+    // @PreAuthorize("hasAuthority('CREATE')")
     public String seguridad() {
         return "seguridad !=";
     }
@@ -30,31 +30,31 @@ public class UserController {
     //TODO others
 
     @GetMapping("/get")
-    @PreAuthorize("hasAuthority('READ')")
+    // @PreAuthorize("hasAuthority('READ')")
     public String helloGet() {
         return "funciona GET";
     }
     
     @PostMapping("/post")
-    @PreAuthorize("hasAuthority('CREATE') or hasAuthority('READ')")
+    // @PreAuthorize("hasAuthority('CREATE') or hasAuthority('READ')")
     public String helloPost() {
         return "funciona POST";
     }
 
     @PutMapping("/put")
-    @PreAuthorize("hasAuthority('UPDATE')")
+    // @PreAuthorize("hasAuthority('UPDATE')")
     public String helloPut() {
         return "funciona PUT";
     }
     
     @DeleteMapping("/delete")
-    @PreAuthorize("hasAuthority('DELETE')")
+    // @PreAuthorize("hasAuthority('DELETE')")
     public String helloDelete() {
         return "funciona DELETE";
     }
 
     @PatchMapping("/patch")
-    @PreAuthorize("hasAuthority('PATCH')")
+    // @PreAuthorize("hasAuthority('PATCH')")
     public String helloPatch() {
         return "funciona PATCH";
     }
