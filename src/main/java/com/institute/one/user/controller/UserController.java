@@ -2,7 +2,11 @@ package com.institute.one.user.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @RestController
@@ -19,36 +23,40 @@ public class UserController {
     @GetMapping("/seguridad")
     @PreAuthorize("hasAuthority('CREATE')")
     public String seguridad() {
-        return "seguridad";
+        return "seguridad !=";
     }
+
 
     //TODO others
 
     @GetMapping("/get")
-    @PreAuthorize("permitAll()")
+    @PreAuthorize("hasAuthority('READ')")
     public String helloGet() {
-        return "funciona";
+        return "funciona GET";
     }
     
-    @GetMapping("/post")
-    @PreAuthorize("hasAuthority('CREATE')")
+    @PostMapping("/post")
+    @PreAuthorize("hasAuthority('CREATE') or hasAuthority('READ')")
     public String helloPost() {
-        return "seguridad";
+        return "funciona POST";
     }
-    @GetMapping("/put")
-    @PreAuthorize("permitAll()")
+
+    @PutMapping("/put")
+    @PreAuthorize("hasAuthority('UPDATE')")
     public String helloPut() {
-        return "funciona";
+        return "funciona PUT";
     }
     
-    @GetMapping("/delete")
-    @PreAuthorize("hasAuthority('CREATE')")
+    @DeleteMapping("/delete")
+    @PreAuthorize("hasAuthority('DELETE')")
     public String helloDelete() {
-        return "seguridad";
+        return "funciona DELETE";
     }
-    @GetMapping("/patch")
-    @PreAuthorize("hasAuthority('CREATE')")
+
+    @PatchMapping("/patch")
+    @PreAuthorize("hasAuthority('PATCH')")
     public String helloPatch() {
-        return "seguridad";
+        return "funciona PATCH";
     }
+
 }
