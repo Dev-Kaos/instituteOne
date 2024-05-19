@@ -22,38 +22,41 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("/materia")
-// @PreAuthorize("denyAll()")
+@PreAuthorize("denyAll()")
 public class SubjectController {
-
+    
     @Autowired
     private ISubjectService subjectService;
-
+    
     // find all
     @GetMapping("/find")
+    @PreAuthorize("hasAuthority('READ')")
     public ResponseEntity<List<SubjectDTO>> findAll() {
-
+        
         return new ResponseEntity<>(this.subjectService.findAll(), HttpStatus.OK);
-
+        
     }
-
+    
     // find by id
+    @PreAuthorize("hasAuthority('READ')")
     @GetMapping("/find/{id}")
     public ResponseEntity<SubjectDTO> findById(@PathVariable Long id) {
-
+        
         return new ResponseEntity<>(this.subjectService.findById(id), HttpStatus.OK);
-
+        
     }
-
+    
     // create user
     @PostMapping("/create")
+    @PreAuthorize("hasAuthority('CREATE')")
     public ResponseEntity<SubjectDTO> createSubject(@RequestBody SubjectDTO subjectDTO) {
 
         return new ResponseEntity<>(this.subjectService.createSubject(subjectDTO), HttpStatus.CREATED);
 
     }
 
-    @PutMapping("/update")
-    // @PreAuthorize("hasAuthority('UPDATE')")
+    @PutMapping("/update/{id}")
+    @PreAuthorize("hasAuthority('UPDATE')")
     public ResponseEntity<SubjectDTO> updateSubject(@RequestBody SubjectDTO subjectDTO, @PathVariable Long id) {
         
         return new ResponseEntity<>(this.subjectService.updateSubject(id, subjectDTO), HttpStatus.OK);
@@ -61,7 +64,7 @@ public class SubjectController {
     }
 
     @DeleteMapping("/delete/{id}")
-    // @PreAuthorize("hasAuthority('DELETE')")
+    @PreAuthorize("hasAuthority('DELETE')")
     public ResponseEntity<String> deleteSubject(@PathVariable Long id) {
         return new ResponseEntity<>(this.subjectService.deleteSubject(id), HttpStatus.NO_CONTENT);
     }

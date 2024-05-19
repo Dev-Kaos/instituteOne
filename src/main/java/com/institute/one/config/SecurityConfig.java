@@ -57,34 +57,40 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .httpBasic(Customizer.withDefaults())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(http -> {
+                // .authorizeHttpRequests(http -> {
 
-                    //TODO allow authorization
-                    http.requestMatchers(HttpMethod.GET, "/usuario/funciona").permitAll();
-                    http.requestMatchers(HttpMethod.GET, "/usuario/get").permitAll();
-
-                    // allow authorization
-
-                    http.requestMatchers(HttpMethod.GET, "/usuario/seguridad").hasAuthority("CREATE");
+                //     //TODO allow authorization
+                //     http.requestMatchers(HttpMethod.GET, "/usuario/funciona").permitAll();
+                //     http.requestMatchers(HttpMethod.GET, "/usuario/get").permitAll();
                     
-                    // others
-                    http.requestMatchers(HttpMethod.GET, "/usuario/get").hasAuthority("READ");
-                    http.requestMatchers(HttpMethod.POST, "/usuario/post").hasAuthority("CREATE");
-                    http.requestMatchers(HttpMethod.PUT, "/usuario/put").hasAuthority("UPDATE");
+                //     // allow authorization
+                    
+                //     http.requestMatchers(HttpMethod.GET, "/usuario/seguridad").hasAuthority("CREATE");
+                    
+                //     // others
+                //     http.requestMatchers(HttpMethod.GET, "/usuario/get").hasAuthority("READ");
+                //     http.requestMatchers(HttpMethod.POST, "/usuario/post").hasAuthority("CREATE");
+                //     http.requestMatchers(HttpMethod.PUT, "/usuario/put").hasAuthority("UPDATE");
                     
                     
                     
-                    // other methods
+                //     // other methods
                     
-                    http.requestMatchers(HttpMethod.DELETE, "/usuario/delete").hasAnyAuthority("UPDATE","DELETE");
-
-                    // other methods
-                    http.requestMatchers(HttpMethod.PATCH, "/usuario/patch").hasAnyRole("ADMIN", "USER");
-
-
-
-                    http.anyRequest().denyAll();
-                })
+                //     http.requestMatchers(HttpMethod.DELETE, "/usuario/delete").hasAnyAuthority("UPDATE","DELETE");
+                    
+                //     // other methods
+                //     http.requestMatchers(HttpMethod.PATCH, "/usuario/patch").hasAnyRole("ADMIN", "USER");
+                    
+                //     // Materias
+                //     http.requestMatchers(HttpMethod.GET, "/materia/find/{id}").permitAll();
+                //     http.requestMatchers(HttpMethod.GET, "/materia/find").permitAll();
+                //     http.requestMatchers(HttpMethod.POST, "/materia/create").hasAuthority("CREATE");
+                //     http.requestMatchers(HttpMethod.PUT, "/materia/update").hasAuthority("UPDATE");
+                //     http.requestMatchers(HttpMethod.PUT, "/materia/update/{id}").hasAuthority("UPDATE");
+                    
+                    
+                //     http.anyRequest().denyAll();
+                // })
                 .build();
     }
 
