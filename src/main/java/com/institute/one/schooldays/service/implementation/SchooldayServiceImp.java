@@ -14,6 +14,7 @@ import com.institute.one.schooldays.persistence.repository.ISchooldayRepository;
 import com.institute.one.schooldays.service.interfaces.ISchooldayService;
 import com.institute.one.subject.dto.SubjectDTO;
 import com.institute.one.subject.persistence.model.SubjectEntity;
+import com.institute.one.utilities.enums.StateEnum;
 
 @Service
 public class SchooldayServiceImp implements ISchooldayService {
@@ -136,6 +137,17 @@ public class SchooldayServiceImp implements ISchooldayService {
         } else {
             return "la jornada con " + id + " no existe";
         }
+    }
+
+    @Override
+    public List<SchooldayDTO> findByState(StateEnum stateEnum) {
+
+        ModelMapper modelMapper = new ModelMapper();
+    return this.schooldayRepository.findByState(stateEnum)
+    .stream()
+    .map(entity -> modelMapper.map(entity, SchooldayDTO.class))
+    .collect(Collectors.toList());
+
     }
 
 }

@@ -3,6 +3,7 @@ package com.institute.one.schooldays.service.interfaces;
 import java.util.List;
 
 import com.institute.one.schooldays.dto.SchooldayDTO;
+import com.institute.one.utilities.enums.StateEnum;
 
 public interface ISchooldayService {
 
@@ -13,6 +14,8 @@ public interface ISchooldayService {
     List<SchooldayDTO> findAllByNameContaining(String name);
 
     List<SchooldayDTO> findAllByDescriptionContaining(String description);
+
+    List<SchooldayDTO> findByState(StateEnum stateEnum);
 
     // List<SchooldayDTO> findAllByStateContaining(String state);
 

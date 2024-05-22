@@ -2,10 +2,13 @@ package com.institute.one.schooldays.persistence.repository;
 
 import java.util.List;
 
+import javax.swing.undo.StateEdit;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.institute.one.schooldays.persistence.model.SchooldayEntity;
+import com.institute.one.utilities.enums.StateEnum;
 
 @Repository
 public interface ISchooldayRepository extends JpaRepository<SchooldayEntity, Long> {
@@ -14,6 +17,6 @@ public interface ISchooldayRepository extends JpaRepository<SchooldayEntity, Lon
 
     List<SchooldayEntity> findAllByDescriptionContaining(String description);
 
-    // List<SchooldayEntity> findAllByStateContaining(String state);
+    List<SchooldayEntity> findByState(StateEnum stateEnum);
 
 }

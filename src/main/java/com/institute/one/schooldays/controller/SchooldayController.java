@@ -1,5 +1,7 @@
 package com.institute.one.schooldays.controller;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -7,6 +9,7 @@ import com.institute.one.schooldays.dto.SchooldayDTO;
 import com.institute.one.schooldays.service.interfaces.ISchooldayService;
 import com.institute.one.subject.dto.SubjectDTO;
 import com.institute.one.subject.service.interfaces.ISubjectService;
+import com.institute.one.utilities.enums.StateEnum;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -66,17 +69,27 @@ public class SchooldayController {
                 HttpStatus.OK);
 
     }
-    // // find by id
-    // @PreAuthorize("hasAuthority('READ')")
-    // @GetMapping("/buscar/estado/{state}")
-    // public ResponseEntity<List<SchooldayDTO>> findById(@PathVariable String
-    // state) {
 
-    // return new
-    // ResponseEntity<>(this.schooldayService.findAllByStateContaining(state),
-    // HttpStatus.OK);
+    // // find by state
+    @PreAuthorize("hasAuthority('READ')")
+    @GetMapping("/buscar/estado/{state}")
+    public ResponseEntity<List<SchooldayDTO>> findByState(@PathVariable String state) {
 
-    // }
+        StateEnum[] states = StateEnum.values();
+        for (StateEnum state1 : states) {
+            if (state1.name().equals(state)) {
+
+                StateEnum stateEnum = StateEnum.valueOf(state);
+
+                return new ResponseEntity<>(this.schooldayService.findByState(stateEnum),
+                        HttpStatus.OK);
+
+            }
+        }
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+
+    }
 
     // create user
     @PostMapping("/crear")
