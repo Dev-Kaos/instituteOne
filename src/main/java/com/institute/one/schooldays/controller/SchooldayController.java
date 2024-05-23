@@ -11,6 +11,8 @@ import com.institute.one.subject.dto.SubjectDTO;
 import com.institute.one.subject.service.interfaces.ISubjectService;
 import com.institute.one.utilities.enums.StateEnum;
 
+import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -94,7 +96,7 @@ public class SchooldayController {
     // create user
     @PostMapping("/crear")
     @PreAuthorize("hasAuthority('CREATE')")
-    public ResponseEntity<SchooldayDTO> save(@RequestBody SchooldayDTO schooldayDTO) {
+    public ResponseEntity<SchooldayDTO> save(@Valid @RequestBody SchooldayDTO schooldayDTO) {
 
         return new ResponseEntity<>(this.schooldayService.save(schooldayDTO), HttpStatus.CREATED);
 
